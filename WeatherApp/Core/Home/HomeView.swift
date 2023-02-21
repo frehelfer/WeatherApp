@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  HomeView.swift
 //  WeatherApp
 //
 //  Created by Frédéric Helfer on 20/02/23.
@@ -7,7 +7,9 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct HomeView: View {
+    @StateObject var vm = HomeViewModel()
+    
     var body: some View {
         ZStack {
             
@@ -23,6 +25,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        HomeView(vm: HomeViewModel())
     }
 }
