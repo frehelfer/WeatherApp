@@ -10,7 +10,7 @@ import Foundation
 @MainActor
 class HomeViewModel: ObservableObject {
     @Published var currentWeather: CurrentWeather? = nil
-    @Published var forecastWeather: ForecastWeather? = nil
+    @Published var forecastWeather: HourlyForecast? = nil
     
     private var weatherService = WeatherDataService()
     

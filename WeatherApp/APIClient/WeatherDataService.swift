@@ -41,7 +41,7 @@ class WeatherDataService: ObservableObject {
         }
     }
     
-    public func fetchForecastWeather(location: Location) async throws -> ForecastWeather {
+    public func fetchForecastWeather(location: Location) async throws -> HourlyForecast {
         guard let url = URL(string: "https://api.openweathermap.org/data/2.5/forecast?lat=\(location.lat)&lon=\(location.lon)&appid=\(apiKey)&units=\(units)") else {
             throw URLError(.badURL)
         }
@@ -49,11 +49,14 @@ class WeatherDataService: ObservableObject {
         print(url)
         
         let decoder = JSONDecoder()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         decoder.keyDecodingStrategy = .convertFromSnakeCase
+        decoder.dateDecodingStrategy = .formatted(dateFormatter)
         
         do {
             let (data, _) = try await URLSession.shared.data(from: url)
-            let forecastWeather = try decoder.decode(ForecastWeather.self, from: data)
+            let forecastWeather = try decoder.decode(HourlyForecast.self, from: data)
             return forecastWeather
         } catch {
             throw URLError(.badServerResponse)
