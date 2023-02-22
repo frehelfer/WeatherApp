@@ -20,8 +20,13 @@ class HomeViewModel: ObservableObject {
     
     func fetchData() async {
         do {
-            currentWeather = try await weatherService.fetchCurrentWeather(location: Location(lat: -29.737030, lon: -52.448650))
-            forecastWeather = try await weatherService.fetchForecastWeather(location: Location(lat: -29.737030, lon: -52.448650))
+            let (currentWeather, forecastWeather) = try await (
+                weatherService.fetchCurrentWeather(location: Location(lat: -29.737030, lon: -52.448650)),
+                weatherService.fetchForecastWeather(location: Location(lat: -29.737030, lon: -52.448650))
+            )
+            self.currentWeather = currentWeather
+            self.forecastWeather = forecastWeather
+            
         } catch {
             print(error.localizedDescription)
         }

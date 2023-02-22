@@ -23,7 +23,7 @@ class WeatherDataService: ObservableObject {
     
     public func fetchCurrentWeather(location: Location) async throws -> CurrentWeather {
         guard
-            let url = URL(string: "https://api.openweathermap.org/data/2.5/weather?lat=\(location.lat)&lon=\(location.lon)&appid=\(apiKey)&units=\(units)") else {
+            let url = URL(string: "https://api.openweathermap.org/data/2.5/weather?lat=\(location.lat)&lon=\(location.lon)&appid=\(apiKey)&units=\(units)&lang=\(location.language)") else {
             throw URLError(.badURL)
         }
         
@@ -42,15 +42,15 @@ class WeatherDataService: ObservableObject {
     }
     
     public func fetchForecastWeather(location: Location) async throws -> HourlyForecast {
-        guard let url = URL(string: "https://api.openweathermap.org/data/2.5/forecast?lat=\(location.lat)&lon=\(location.lon)&appid=\(apiKey)&units=\(units)") else {
+        guard let url = URL(string: "https://api.openweathermap.org/data/2.5/forecast?lat=\(location.lat)&lon=\(location.lon)&appid=\(apiKey)&units=\(units)&lang=\(location.language)") else {
             throw URLError(.badURL)
         }
-        
         print(url)
         
         let decoder = JSONDecoder()
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss" // 2023-02-22 03:00:00
+        dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         decoder.dateDecodingStrategy = .formatted(dateFormatter)
         
