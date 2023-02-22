@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct HomeView: View {
+    @EnvironmentObject var locationDataManager: LocationDataManager
     @StateObject var vm = HomeViewModel()
     
     var body: some View {
@@ -17,22 +18,32 @@ struct HomeView: View {
                 .ignoresSafeArea()
             
             VStack {
-                Spacer()
-                
-                mainInfo
-                
-                Spacer()
-                
-                if let model = vm.forecastWeather {
-                    HourlyRowView(items: model)
+                if vm.isLoading == false {
+                    Spacer()
+                    
+                    mainInfo
+                    
+                    Spacer()
+                    
+                    if let model = vm.forecastWeather {
+                        HourlyRowView(items: model)
+                    }
+                    
+                    Spacer()
+                } else {
+                    ProgressView()
                 }
-                
-                Spacer()
             }
         }
-        .task {
-            await vm.fetchData()
-        }
+        .onReceive(locationDataManager.$isLoading, perform: { _ in
+            guard let location = locationDataManager.location  else { return }
+            
+            let newLocation = Location(lat: location.latitude, lon: location.longitude)
+            
+            Task {
+                await vm.fetchData(location: newLocation)
+            }
+        })
     }
 }
 
@@ -63,5 +74,6 @@ extension HomeView {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView(vm: HomeViewModel())
+            .environmentObject(LocationDataManager())
     }
 }

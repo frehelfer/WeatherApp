@@ -7,10 +7,13 @@
 
 import Foundation
 
+//Location(lat: -29.737030, lon: -52.448650)
+
 @MainActor
 class HomeViewModel: ObservableObject {
     @Published var currentWeather: CurrentWeather? = nil
     @Published var forecastWeather: HourlyForecast? = nil
+    @Published var isLoading = true
     
     private var weatherService = WeatherDataService()
     
@@ -18,11 +21,11 @@ class HomeViewModel: ObservableObject {
         
     }
     
-    func fetchData() async {
+    func fetchData(location: Location) async {
         do {
             let (currentWeather, forecastWeather) = try await (
-                weatherService.fetchCurrentWeather(location: Location(lat: -29.737030, lon: -52.448650)),
-                weatherService.fetchForecastWeather(location: Location(lat: -29.737030, lon: -52.448650))
+                weatherService.fetchCurrentWeather(location: location),
+                weatherService.fetchForecastWeather(location: location)
             )
             self.currentWeather = currentWeather
             self.forecastWeather = forecastWeather
@@ -30,5 +33,7 @@ class HomeViewModel: ObservableObject {
         } catch {
             print(error.localizedDescription)
         }
+        
+        isLoading = false
     }
 }

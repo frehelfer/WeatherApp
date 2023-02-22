@@ -40,11 +40,6 @@ struct List: Codable, Identifiable {
     let clouds: Clouds?
     let dtTxt: Date? // "2022-08-30 15:00:00"
     
-//    enum CodingKeys: String, CodingKey {
-//        case main, weather, clouds
-//        case hour = "dt_txt"
-//    }
-    
     static let example = List(
         main: Main(temp: 27.54, feelsLike: 28.19, tempMin: 26.72, tempMax: 27.54, pressure: 1007, humidity: 53, seaLevel: 1007, grndLevel: 996),
         weather: [Weather(id: 802, main: "Clouds", description: "scattered clouds", icon: .clearSky)],

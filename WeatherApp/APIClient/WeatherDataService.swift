@@ -27,7 +27,7 @@ class WeatherDataService: ObservableObject {
             throw URLError(.badURL)
         }
         
-        print(url)
+//        print(url)
         
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
@@ -45,7 +45,7 @@ class WeatherDataService: ObservableObject {
         guard let url = URL(string: "https://api.openweathermap.org/data/2.5/forecast?lat=\(location.lat)&lon=\(location.lon)&appid=\(apiKey)&units=\(units)&lang=\(location.language)") else {
             throw URLError(.badURL)
         }
-        print(url)
+//        print(url)
         
         let decoder = JSONDecoder()
         let dateFormatter = DateFormatter()
