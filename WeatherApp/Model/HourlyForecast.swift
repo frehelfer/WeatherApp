@@ -9,26 +9,47 @@ import Foundation
 
 struct HourlyForecast: Codable {
     let list: [List]
-    let city: City?
+//    let city: City?
+    
+    static let example = HourlyForecast(list: [
+        List(
+            main: Main(temp: 27.54, feelsLike: 28.19, tempMin: 26.72, tempMax: 27.54, pressure: 1007, humidity: 53, seaLevel: 1007, grndLevel: 996),
+            weather: [Weather(id: 802, main: "Clouds", description: "scattered clouds", icon: .clearSky)],
+            clouds: Clouds(all: 29),
+            dtTxt: Date()
+        ),
+        List(
+            main: Main(temp: 27.54, feelsLike: 28.19, tempMin: 26.72, tempMax: 27.54, pressure: 1007, humidity: 53, seaLevel: 1007, grndLevel: 996),
+            weather: [Weather(id: 802, main: "Clouds", description: "scattered clouds", icon: .clearSky)],
+            clouds: Clouds(all: 29),
+            dtTxt: Date()
+        ),
+        List(
+            main: Main(temp: 27.54, feelsLike: 28.19, tempMin: 26.72, tempMax: 27.54, pressure: 1007, humidity: 53, seaLevel: 1007, grndLevel: 996),
+            weather: [Weather(id: 802, main: "Clouds", description: "scattered clouds", icon: .clearSky)],
+            clouds: Clouds(all: 29),
+            dtTxt: Date()
+        ),
+    ])
 }
 
-struct List: Codable {
+struct List: Codable, Identifiable {
     let id = UUID()
     let main: Main?
-    let weather: [Weather]?
+    let weather: [Weather]
     let clouds: Clouds?
-    let hour: Date? // "2022-08-30 15:00:00"
+    let dtTxt: Date? // "2022-08-30 15:00:00"
     
-    enum CodingKeys: String, CodingKey {
-        case main, weather, clouds
-        case hour = "dt_txt"
-    }
+//    enum CodingKeys: String, CodingKey {
+//        case main, weather, clouds
+//        case hour = "dt_txt"
+//    }
     
     static let example = List(
         main: Main(temp: 27.54, feelsLike: 28.19, tempMin: 26.72, tempMax: 27.54, pressure: 1007, humidity: 53, seaLevel: 1007, grndLevel: 996),
-        weather: [Weather(id: 802, main: "Clouds", description: "scattered clouds", icon: "03d")],
+        weather: [Weather(id: 802, main: "Clouds", description: "scattered clouds", icon: .clearSky)],
         clouds: Clouds(all: 29),
-        hour: Date()
+        dtTxt: Date()
         )
 }
 

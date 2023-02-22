@@ -9,7 +9,7 @@ import Foundation
 
 struct CurrentWeather: Codable {
     let coord: Coord?
-    let weather: [Weather]?
+    let weather: [Weather]
     let base: String?
     let main: Main?
     let visibility: Int?
@@ -29,10 +29,10 @@ struct Coord: Codable {
 }
 
 struct Weather: Codable {
-    let id: Int
-    let main: String
-    let description: String
-    let icon: String
+    let id: Int?
+    let main: String?
+    let description: String?
+    let icon: weatherIcon?
 }
 
 struct Main: Codable {
