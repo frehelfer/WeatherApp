@@ -14,9 +14,20 @@ extension Date {
     /// Convert Date to "5 AM"
     /// Convert Date to "5 PM"
     /// ```
-    func asDateString() -> String {
+    func asTimeAbrev() -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "h a"
+        return dateFormatter.string(from: self)
+    }
+    
+    /// Converts a Date into string representation
+    /// ```
+    /// Convert Date to "Tue"
+    /// Convert Date to "Wed"
+    /// ```
+    func asDaysOfWeek() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "ccc"
         return dateFormatter.string(from: self)
     }
 }
