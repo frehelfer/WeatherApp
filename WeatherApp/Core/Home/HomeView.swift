@@ -17,7 +17,17 @@ struct HomeView: View {
                 .ignoresSafeArea()
             
             VStack {
+                Spacer()
+                
                 mainInfo
+                
+                Spacer()
+                
+                if let model = vm.forecastWeather {
+                    HourlyRowView(items: model)
+                }
+                
+                Spacer()
             }
         }
         .task {
@@ -38,7 +48,7 @@ extension HomeView {
                 .font(.system(size: 50))
                 .fontWeight(.semibold)
             
-            Text(vm.currentWeather?.weather?.first?.description.capitalized ?? "")
+            Text(vm.currentWeather?.weather.first?.description?.capitalized ?? "")
                 .foregroundColor(.theme.secondaryText)
             
             HStack(spacing: 6) {
