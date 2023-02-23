@@ -21,7 +21,13 @@ struct HourlyRowView: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 15) {
                     ForEach(items.list) { item in
-                        HourlyColumnView(item: item)
+                        GeometryReader { geo in
+                            HourlyColumnView(item: item)
+                                .rotation3DEffect(
+                                    Angle(degrees: getPercentage(geo: geo) / -10),
+                                    axis: (x: 0.0, y: 10.0, z: 0.0))
+                        }
+                        .frame(width: 70, height: 165)
                     }
                 }
                 .padding(.leading)
@@ -32,6 +38,12 @@ struct HourlyRowView: View {
         .foregroundColor(.theme.accent)
         .padding(.vertical)
         .background(.thinMaterial.opacity(0.5))
+    }
+    
+    func getPercentage(geo: GeometryProxy) -> Double {
+//        let maxDistance = UIScreen.main.bounds.width / 2
+        let currentX = geo.frame(in: .global).minX
+        return Double(currentX - 30)
     }
 }
 
