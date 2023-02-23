@@ -16,6 +16,7 @@
 		8D11998929A7F7D400931CD9 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D11998829A7F7D400931CD9 /* SettingsView.swift */; };
 		8D11998C29A809AC00931CD9 /* LocationsRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D11998B29A809AC00931CD9 /* LocationsRowView.swift */; };
 		8D11999329A828E300931CD9 /* SearchLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D11999229A828E300931CD9 /* SearchLocation.swift */; };
+		8D11999629A82F7B00931CD9 /* LocationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D11999529A82F7B00931CD9 /* LocationsViewModel.swift */; };
 		8D47170229A4210100079790 /* WeatherAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D47170129A4210100079790 /* WeatherAppApp.swift */; };
 		8D47170429A4210100079790 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D47170329A4210100079790 /* HomeView.swift */; };
 		8D47170629A4210300079790 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D47170529A4210300079790 /* Assets.xcassets */; };
@@ -55,6 +56,7 @@
 		8D11998829A7F7D400931CD9 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		8D11998B29A809AC00931CD9 /* LocationsRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsRowView.swift; sourceTree = "<group>"; };
 		8D11999229A828E300931CD9 /* SearchLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLocation.swift; sourceTree = "<group>"; };
+		8D11999529A82F7B00931CD9 /* LocationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsViewModel.swift; sourceTree = "<group>"; };
 		8D4716FE29A4210100079790 /* WeatherApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D47170129A4210100079790 /* WeatherAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAppApp.swift; sourceTree = "<group>"; };
 		8D47170329A4210100079790 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 			isa = PBXGroup;
 			children = (
 				8D11998A29A8099900931CD9 /* Components */,
+				8D11999529A82F7B00931CD9 /* LocationsViewModel.swift */,
 				8D11998629A7F7AE00931CD9 /* LocationsView.swift */,
 			);
 			path = Location;
@@ -357,6 +360,7 @@
 				8D11996929A665A800931CD9 /* ContentView.swift in Sources */,
 				8D11996629A6528500931CD9 /* LocationDataManager.swift in Sources */,
 				8D47170429A4210100079790 /* HomeView.swift in Sources */,
+				8D11999629A82F7B00931CD9 /* LocationsViewModel.swift in Sources */,
 				8D11998929A7F7D400931CD9 /* SettingsView.swift in Sources */,
 				8D47172629A5598200079790 /* Color+.swift in Sources */,
 				8D47172A29A561FB00079790 /* Date+.swift in Sources */,

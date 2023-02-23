@@ -15,7 +15,7 @@ class HomeViewModel: ObservableObject {
     @Published var forecastWeather: HourlyForecast? = nil
     @Published var isLoading = true
     
-    private var weatherService = WeatherDataService()
+    private var weatherService = WeatherDataService.shared
     
     init() {
         
@@ -25,7 +25,7 @@ class HomeViewModel: ObservableObject {
         do {
             let (currentWeather, forecastWeather) = try await (
                 weatherService.fetchCurrentWeather(location: location),
-                weatherService.fetchForecastWeather(location: location)
+                weatherService.fetchHourlyForecast(location: location)
             )
             self.currentWeather = currentWeather
             self.forecastWeather = forecastWeather
