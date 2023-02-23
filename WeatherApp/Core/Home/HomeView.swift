@@ -17,31 +17,41 @@ struct HomeView: View {
             LinearGradient(colors: [Color.blue, Color.white], startPoint: .bottom, endPoint: .top)
                 .ignoresSafeArea()
             
-            VStack {
-                if vm.isLoading == false {
-                    Spacer()
-                    
-                    mainInfo
-                    
-                    Spacer()
-                    
-                    if let model = vm.forecastWeather {
-                        HourlyRowView(items: model)
+            GeometryReader { proxy in
+                ScrollView {
+                    VStack {
+                        if vm.isLoading == false {
+                            Spacer()
+                            
+                            mainInfo
+                            
+                            Spacer()
+                            
+                            if let model = vm.forecastWeather {
+                                HourlyRowView(items: model)
+                            }
+                            
+                            Spacer()
+                        } else {
+                            ProgressView()
+                        }
                     }
-                    
-                    Spacer()
-                } else {
-                    ProgressView()
+                    .frame(minHeight: proxy.size.height)
+                    .frame(maxWidth: .infinity)
+                }
+                .refreshable {
+                    locationDataManager.requestLocation()
                 }
             }
         }
-        .onReceive(locationDataManager.$isLoading, perform: { _ in
-            guard let location = locationDataManager.location  else { return }
-            
-            let newLocation = Location(lat: location.latitude, lon: location.longitude)
+        .onChange(of: locationDataManager.isLoading, perform: { newValue in
+            guard
+                newValue == false,
+                let location = locationDataManager.location
+            else { return }
             
             Task {
-                await vm.fetchData(location: newLocation)
+                await vm.fetchData(location: location)
             }
         })
     }

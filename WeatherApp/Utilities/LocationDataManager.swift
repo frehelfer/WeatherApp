@@ -10,7 +10,7 @@ import CoreLocation
 
 class LocationDataManager: NSObject, ObservableObject {
     @Published var authorizationStatus: CLAuthorizationStatus
-    @Published var location: CLLocationCoordinate2D? = nil
+    @Published var location: Location? = nil
     @Published var isLoading: Bool = true
     
     private let locationManager: CLLocationManager
@@ -23,6 +23,11 @@ class LocationDataManager: NSObject, ObservableObject {
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyReduced
         locationManager.requestLocation()
+    }
+    
+    func requestLocation() {
+        locationManager.requestLocation()
+        isLoading = true
     }
     
     func requestPermission() {
@@ -65,7 +70,9 @@ extension LocationDataManager: CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        location = locations.first?.coordinate
+        guard let newLocation = locations.first?.coordinate else { return }
+        
+        location = Location(lat: newLocation.latitude, lon: newLocation.longitude)
         isLoading = false
     }
     
