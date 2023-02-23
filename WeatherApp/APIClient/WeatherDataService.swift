@@ -14,6 +14,7 @@ import Foundation
 
 class WeatherDataService: ObservableObject {
     
+    private let baseUrl = "https://api.openweathermap.org"
     private let apiKey = "38ec62852779e6ad30a064b9e15e9bff"
     private let units = "metric"
     
@@ -23,7 +24,7 @@ class WeatherDataService: ObservableObject {
     
     public func fetchCurrentWeather(location: Location) async throws -> CurrentWeather {
         guard
-            let url = URL(string: "https://api.openweathermap.org/data/2.5/weather?lat=\(location.lat)&lon=\(location.lon)&appid=\(apiKey)&units=\(units)&lang=\(location.language)") else {
+            let url = URL(string: "\(baseUrl)/data/2.5/weather?lat=\(location.lat)&lon=\(location.lon)&appid=\(apiKey)&units=\(units)&lang=\(location.language)") else {
             throw URLError(.badURL)
         }
         
@@ -42,7 +43,7 @@ class WeatherDataService: ObservableObject {
     }
     
     public func fetchForecastWeather(location: Location) async throws -> HourlyForecast {
-        guard let url = URL(string: "https://api.openweathermap.org/data/2.5/forecast?lat=\(location.lat)&lon=\(location.lon)&appid=\(apiKey)&units=\(units)&lang=\(location.language)") else {
+        guard let url = URL(string: "\(baseUrl)/data/2.5/forecast?lat=\(location.lat)&lon=\(location.lon)&appid=\(apiKey)&units=\(units)&lang=\(location.language)") else {
             throw URLError(.badURL)
         }
 //        print(url)

@@ -14,8 +14,11 @@ struct HomeView: View {
     var body: some View {
         ZStack {
             
-            LinearGradient(colors: [Color.blue, Color.white], startPoint: .bottom, endPoint: .top)
-                .ignoresSafeArea()
+            LinearGradient(gradient: Gradient(stops: [
+                .init(color: .theme.blueBackground, location: 0.30),
+                .init(color: .blue.opacity(0.5), location: 0.90)
+            ]), startPoint: .bottomLeading, endPoint: .top)
+            .ignoresSafeArea()
             
             GeometryReader { proxy in
                 ScrollView {

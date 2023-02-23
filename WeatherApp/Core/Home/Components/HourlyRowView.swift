@@ -37,7 +37,7 @@ struct HourlyRowView: View {
         }
         .foregroundColor(.theme.accent)
         .padding(.vertical)
-        .background(.thinMaterial.opacity(0.5))
+        .background(.ultraThinMaterial)
     }
     
     func getPercentage(geo: GeometryProxy) -> Double {

@@ -11,16 +11,14 @@ struct ContentView: View {
     @StateObject var locationDataManager = LocationDataManager()
     
     var body: some View {
-        ZStack {
-            
-            
-            NavigationStack {
-                TabView {
+        NavigationStack {
+            TabView {
+                Group {
                     Group {
                         switch locationDataManager.authorizationStatus {
                         case .notDetermined:
                             RequestLocationView()
-                                
+                            
                         case .restricted:
                             ErrorView(errorText: "Location use is restricted.")
                             
@@ -29,7 +27,7 @@ struct ContentView: View {
                             
                         case .authorizedAlways, .authorizedWhenInUse:
                             HomeView()
-                                
+                            
                         default:
                             Text("Unexpected status")
                         }
@@ -38,22 +36,24 @@ struct ContentView: View {
                         Label("Home", systemImage: "thermometer.sun.fill")
                     }
                     
-//                    LocationsView()
-//                        .tabItem {
-//                            Label("Locations", systemImage: "list.star")
-//                        }
-//
-//                    SettingsView()
-//                        .tabItem {
-//                            Label("Settings", systemImage: "gearshape")
-//                        }
-
+                    LocationsView()
+                        .tabItem {
+                            Label("Locations", systemImage: "list.star")
+                        }
+                    
+                    SettingsView()
+                        .tabItem {
+                            Label("Settings", systemImage: "gearshape")
+                        }
                 }
+                .toolbar(.visible, for: .tabBar)
+                .toolbarBackground(Color.red, for: .tabBar)
+                
             }
             .onAppear {
                 locationDataManager.requestPermission()
             }
-            .environmentObject(locationDataManager)
+        .environmentObject(locationDataManager)
         }
     }
 }

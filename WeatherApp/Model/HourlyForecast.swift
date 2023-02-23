@@ -8,23 +8,22 @@
 import Foundation
 
 struct HourlyForecast: Codable {
-    let list: [List]
-//    let city: City?
+    let list: [HourlyItem]
     
     static let example = HourlyForecast(list: [
-        List(
+        HourlyItem(
             main: Main(temp: 27.54, feelsLike: 28.19, tempMin: 26.72, tempMax: 27.54, pressure: 1007, humidity: 53, seaLevel: 1007, grndLevel: 996),
             weather: [Weather(id: 802, main: "Clouds", description: "scattered clouds", icon: .clearSky)],
             clouds: Clouds(all: 29),
             dtTxt: Date()
         ),
-        List(
+        HourlyItem(
             main: Main(temp: 27.54, feelsLike: 28.19, tempMin: 26.72, tempMax: 27.54, pressure: 1007, humidity: 53, seaLevel: 1007, grndLevel: 996),
             weather: [Weather(id: 802, main: "Clouds", description: "scattered clouds", icon: .clearSky)],
             clouds: Clouds(all: 29),
             dtTxt: Date()
         ),
-        List(
+        HourlyItem(
             main: Main(temp: 27.54, feelsLike: 28.19, tempMin: 26.72, tempMax: 27.54, pressure: 1007, humidity: 53, seaLevel: 1007, grndLevel: 996),
             weather: [Weather(id: 802, main: "Clouds", description: "scattered clouds", icon: .clearSky)],
             clouds: Clouds(all: 29),
@@ -33,14 +32,14 @@ struct HourlyForecast: Codable {
     ])
 }
 
-struct List: Codable, Identifiable {
+struct HourlyItem: Codable, Identifiable {
     let id = UUID()
     let main: Main?
     let weather: [Weather]
     let clouds: Clouds?
     let dtTxt: Date? // "2022-08-30 15:00:00"
     
-    static let example = List(
+    static let example = HourlyItem(
         main: Main(temp: 27.54, feelsLike: 28.19, tempMin: 26.72, tempMax: 27.54, pressure: 1007, humidity: 53, seaLevel: 1007, grndLevel: 996),
         weather: [Weather(id: 802, main: "Clouds", description: "scattered clouds", icon: .clearSky)],
         clouds: Clouds(all: 29),
