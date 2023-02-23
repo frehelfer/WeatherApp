@@ -8,7 +8,8 @@
 import Foundation
 
 struct Location {
-    let lat: Double
-    let lon: Double
+    let cityName: String = ""
+    let lat: Double = 0.0
+    let lon: Double = 0.0
     let language: String = Locale.preferredLanguages.first?.lowercased().replacingOccurrences(of: "-", with: "_") ?? "en"
 }
