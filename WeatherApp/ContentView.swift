@@ -11,49 +11,47 @@ struct ContentView: View {
     @StateObject var locationDataManager = LocationDataManager()
     
     var body: some View {
-        NavigationStack {
-            TabView {
+        TabView {
+            Group {
                 Group {
-                    Group {
-                        switch locationDataManager.authorizationStatus {
-                        case .notDetermined:
-                            RequestLocationView()
-                            
-                        case .restricted:
-                            ErrorView(errorText: "Location use is restricted.")
-                            
-                        case .denied:
-                            ErrorView(errorText: "The app does not have location permissions. Please enable them in settings to start seeing the weather at your location or utilize the manual option bellow.")
-                            
-                        case .authorizedAlways, .authorizedWhenInUse:
-                            HomeView()
-                            
-                        default:
-                            Text("Unexpected status")
-                        }
+                    switch locationDataManager.authorizationStatus {
+                    case .notDetermined:
+                        RequestLocationView()
+                        
+                    case .restricted:
+                        ErrorView(errorText: "Location use is restricted.")
+                        
+                    case .denied:
+                        ErrorView(errorText: "The app does not have location permissions. Please enable them in settings to start seeing the weather at your location or utilize the manual option bellow.")
+                        
+                    case .authorizedAlways, .authorizedWhenInUse:
+                        HomeView()
+                        
+                    default:
+                        Text("Unexpected status")
                     }
-                    .tabItem {
-                        Label("Home", systemImage: "thermometer.sun.fill")
-                    }
-                    
-                    LocationsView()
-                        .tabItem {
-                            Label("Locations", systemImage: "list.star")
-                        }
-                    
-                    SettingsView()
-                        .tabItem {
-                            Label("Settings", systemImage: "gearshape")
-                        }
                 }
-                .toolbar(.visible, for: .tabBar)
-                .toolbarBackground(Color.red, for: .tabBar)
+                .tabItem {
+                    Label("Home", systemImage: "thermometer.sun.fill")
+                }
                 
+                LocationsView()
+                    .tabItem {
+                        Label("Locations", systemImage: "list.star")
+                    }
+                
+                SettingsView()
+                    .tabItem {
+                        Label("Settings", systemImage: "gearshape")
+                    }
             }
-            .onAppear {
-                locationDataManager.requestPermission()
-            }
-        .environmentObject(locationDataManager)
+            .toolbar(.visible, for: .tabBar)
+            .toolbarBackground(Color.red, for: .tabBar)
+            
         }
+        .onAppear {
+            locationDataManager.requestPermission()
+        }
+        .environmentObject(locationDataManager)
     }
 }

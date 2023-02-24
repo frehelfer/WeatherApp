@@ -7,6 +7,7 @@
 
 import Foundation
 
+@MainActor
 class WeatherDataService: ObservableObject {
     
     private let baseUrl = "https://api.openweathermap.org"
@@ -56,7 +57,7 @@ class WeatherDataService: ObservableObject {
         }
     }
     
-    public func fetchSearchLocation(location: Location) async throws -> [SearchLocation] {
+    public func fetchSearchLocations(location: Location) async throws -> [SearchLocation] {
         guard
 //            http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit={limit}&appid={API key}
             let url = URL(string: "\(baseUrl)/geo/1.0/direct?q=\(location.cityName)&limit=5&appid=\(apiKey)") else {

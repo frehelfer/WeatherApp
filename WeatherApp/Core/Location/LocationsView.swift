@@ -8,33 +8,36 @@
 import SwiftUI
 
 struct LocationsView: View {
+    @State var vm = LocationsViewModel()
     @State var searchText: String = ""
     
     var body: some View {
-        ZStack {
-            VStack {
-                List {
-                    ForEach(searchResults, id: \.self) { name in
-                        NavigationLink {
-                            //
-                        } label: {
-                            LocationsRowView(item: name)
+        NavigationStack {
+            ZStack {
+                Color.theme.blueBackground.ignoresSafeArea()
+                
+                VStack {
+                    List {
+                        ForEach(vm.searchedLocations) { location in
+                            NavigationLink {
+                                //
+                            } label: {
+                                Text("\(location.name), \(location.state ?? ""), \(location.country)")
+                            }
                         }
                     }
                 }
             }
+            .navigationTitle("Add Places")
+            .searchable(text: $searchText, prompt: "Search for a city")
+            .onChange(of: searchText) { cityName in
+                
+                Task {
+                    await vm.performSearch(text: cityName)
+                }
+            }
         }
-        .navigationTitle("Add Places")
-        .searchable(text: $searchText, prompt: "Search for a city")
     }
-    
-//    var searchResults: [String] {
-//        if searchText.isEmpty {
-//            return names
-//        } else {
-//            return names.filter { $0.contains(searchText) }
-//        }
-//    }
 }
 
 struct LocationsView_Previews: PreviewProvider {
