@@ -22,6 +22,11 @@ struct CurrentWeather: Codable, Identifiable {
 //    let dt: Int?
 //    let sys: Sys? // - have sunrise and sunset
 //    let timezone: Int?
+    
+    static let example = CurrentWeather(id: 3452925, cod: 200, name: "Porto Alegre",
+                                        coord: Coord(lon: -51.23, lat: -30.0331),
+                                        main: Main(temp: 22.74, feelsLike: 23.39, tempMin: 21.82, tempMax: 22.77, pressure: 1011, humidity: 89, seaLevel: 0, grndLevel: 0),
+                                        weather: [Weather(id: 804, main: "Clouds", description: "nublado", icon: .brokenClouds)])
 }
 
 struct Coord: Codable {
