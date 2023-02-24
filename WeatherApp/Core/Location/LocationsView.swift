@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct LocationsView: View {
-    @State private var vm = LocationsViewModel()
+    @StateObject private var vm = LocationsViewModel()
     @State var searchText: String = ""
     
     @State private var showLocationWeather = false
@@ -24,10 +24,10 @@ struct LocationsView: View {
                             Button {
                                 showLocationWeather.toggle()
                             } label: {
-                                Text("\(location.name), \(location.state ?? ""), \(location.country)")
+                                Text(location.displayFullPlaceName)
                             }
                             .sheet(isPresented: $showLocationWeather) {
-                                LocationWeatherView()
+                                LocationWeatherView(vm: vm, location: location)
                             }
                         }
                     }

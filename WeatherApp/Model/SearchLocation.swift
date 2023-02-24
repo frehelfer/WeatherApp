@@ -16,6 +16,14 @@ struct SearchLocation: Codable, Identifiable {
     let state: String?
     
     static let example = SearchLocation(name: "Porto Alegre", lat: -30.100916650000002, lon: -51.18878818689657, country: "BR", state: "Rio Grande do Sul")
+    
+    var displayFullPlaceName: String {
+        if let state {
+            return "\(name), \(state), \(country)"
+        } else {
+            return "\(name), \(country)"
+        }
+    }
 }
 
 

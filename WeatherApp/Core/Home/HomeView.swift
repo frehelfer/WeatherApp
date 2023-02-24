@@ -26,7 +26,9 @@ struct HomeView: View {
                         if vm.isLoading == false {
                             Spacer()
                             
-                            mainInfo
+                            if let model = vm.currentWeather {
+                                WeatherInfo(currentWeather: model)
+                            }
                             
                             Spacer()
                             
@@ -36,6 +38,7 @@ struct HomeView: View {
                             
                             Spacer()
                         } else {
+                            // TODO: Show loading view, getting location etc...
                             ProgressView()
                         }
                     }
@@ -57,30 +60,6 @@ struct HomeView: View {
                 await vm.fetchData(location: location)
             }
         })
-    }
-}
-
-extension HomeView {
-    
-    var mainInfo: some View {
-        VStack(spacing: 10) {
-            Text(vm.currentWeather?.name ?? "")
-                .font(.title)
-                .fontWeight(.medium)
-            
-            Text((vm.currentWeather?.main.temp?.asStringRounded() ?? "-") + "°C")
-                .font(.system(size: 50))
-                .fontWeight(.semibold)
-            
-            Text(vm.currentWeather?.weather.first?.description?.capitalized ?? "")
-                .foregroundColor(.theme.secondaryText)
-            
-            HStack(spacing: 6) {
-                Text((vm.currentWeather?.main.tempMin?.asStringRounded() ?? "-") + "° /")
-                Text((vm.currentWeather?.main.tempMax?.asStringRounded() ?? "-") + "°")
-            }
-        }
-        .foregroundColor(.theme.accent)
     }
 }
 

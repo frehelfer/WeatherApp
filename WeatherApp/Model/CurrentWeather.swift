@@ -8,11 +8,11 @@
 import Foundation
 
 struct CurrentWeather: Codable, Identifiable {
-    let id: Int
-    let cod: Int
-    let name: String
-    let coord: Coord
-    let main: Main
+    let id: Int?
+    let cod: Int?
+    let name: String?
+    let coord: Coord?
+    let main: Main?
     let weather: [Weather]
 //    let base: String?
 //    let visibility: Int?

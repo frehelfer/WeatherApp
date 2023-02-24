@@ -33,7 +33,7 @@ class WeatherDataService: ObservableObject {
             let currentWeather = try decoder.decode(CurrentWeather.self, from: data)
             return currentWeather
         } catch {
-            throw URLError(.badServerResponse)
+            throw error
         }
     }
     
@@ -42,6 +42,8 @@ class WeatherDataService: ObservableObject {
             let url = URL(string: "\(baseUrl)/data/2.5/forecast?lat=\(location.lat)&lon=\(location.lon)&appid=\(apiKey)&units=\(units)&lang=\(location.language)") else {
             throw URLError(.badURL)
         }
+        
+        print(url)
 
         let decoder = JSONDecoder()
         let dateFormatter = DateFormatter()
@@ -55,7 +57,7 @@ class WeatherDataService: ObservableObject {
             let forecastWeather = try decoder.decode(HourlyForecast.self, from: data)
             return forecastWeather
         } catch {
-            throw URLError(.badServerResponse)
+            throw error
         }
     }
     
@@ -72,7 +74,7 @@ class WeatherDataService: ObservableObject {
             print("fetched..")
             return decoded
         } catch {
-            throw URLError(.badServerResponse)
+            throw error
         }
     }
 }

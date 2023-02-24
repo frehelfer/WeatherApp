@@ -12,7 +12,7 @@ struct WeatherInfo: View {
     
     var body: some View {
         VStack(spacing: 10) {
-            Text(currentWeather.name)
+            Text(currentWeather.name ?? "")
                 .font(.title)
                 .fontWeight(.medium)
             
@@ -21,7 +21,7 @@ struct WeatherInfo: View {
                     .font(.title)
                     .foregroundColor(.theme.accent.opacity(0.65))
                 
-                Text((currentWeather.main.temp?.asStringRounded() ?? "-") + "°C")
+                Text((currentWeather.main?.temp?.asStringRounded() ?? "-") + "°C")
                     .font(.system(size: 50))
                     .fontWeight(.semibold)
             }
@@ -30,8 +30,8 @@ struct WeatherInfo: View {
                 .foregroundColor(.theme.secondaryText)
             
             HStack(spacing: 6) {
-                Text((currentWeather.main.tempMin?.asStringRounded() ?? "-") + "° /")
-                Text((currentWeather.main.tempMax?.asStringRounded() ?? "-") + "°")
+                Text((currentWeather.main?.tempMin?.asStringRounded() ?? "-") + "° /")
+                Text((currentWeather.main?.tempMax?.asStringRounded() ?? "-") + "°")
             }
         }
         .foregroundColor(.theme.accent)

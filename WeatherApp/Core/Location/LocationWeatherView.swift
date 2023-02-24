@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct LocationWeatherView: View {
+    @ObservedObject var vm: LocationsViewModel
+    var location: SearchLocation
+    
     @Environment(\.dismiss) var dismiss
     
     @State var isFav: Bool = false
@@ -28,7 +31,7 @@ struct LocationWeatherView: View {
                             .padding(.horizontal, 20)
                             .padding(.top, 20)
                     }
-
+                    
                     Spacer()
                     
                     Button {
@@ -41,24 +44,40 @@ struct LocationWeatherView: View {
                             .padding(.horizontal, 20)
                             .padding(.top, 20)
                     }
-
+                    
                 }
                 
-                Spacer()
+//                if vm.isLoading == false {
+//                    Spacer()
+//                    
+//                    if let model = vm.currentWeather {
+//                        WeatherInfo(currentWeather: model)
+//                    }
+//                    
+//                    Spacer()
+//                    
+//                    if let model = vm.forecastWeather {
+//                        HourlyForecastRow(items: model)
+//                    }
+//                    
+//                    Spacer()
+//                } else {
+//                    // TODO: Show loading view, getting location etc...
+//                    Spacer()
+//                    ProgressView()
+//                    Spacer()
+//                }
                 
-                WeatherInfo(currentWeather: CurrentWeather.example)
-                    .padding(.bottom, 50)
-                
-                Spacer()
-                
-                HourlyForecastRow(items: HourlyForecast.example)
             }
         }
+//        .task {
+//            await vm.fetchData(location: Location(lat: location.lat, lon: location.lon))
+//        }
     }
 }
 
 struct LocationWeatherView_Previews: PreviewProvider {
     static var previews: some View {
-        LocationWeatherView()
+        LocationWeatherView(vm: LocationsViewModel(), location: SearchLocation.example)
     }
 }

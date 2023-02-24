@@ -7,7 +7,11 @@
 
 import Foundation
 
+@MainActor
 class LocationsViewModel: ObservableObject {
+//    @Published var currentWeather: CurrentWeather? = nil
+//    @Published var forecastWeather: HourlyForecast? = nil
+//    @Published var isLoading = false
     
     @Published var locationsSaved: [Location] = []
     @Published var searchedLocations: [SearchLocation] = []
@@ -32,6 +36,24 @@ class LocationsViewModel: ObservableObject {
             print(error.localizedDescription)
         }
     }
+    
+//    func fetchData(location: Location) async {
+//        isLoading = true
+//        
+//        do {
+//            let (currentWeather, forecastWeather) = try await (
+//                weatherDataService.fetchCurrentWeather(location: location),
+//                weatherDataService.fetchHourlyForecast(location: location)
+//            )
+//            self.currentWeather = currentWeather
+//            self.forecastWeather = forecastWeather
+//            
+//        } catch {
+//            print(error.localizedDescription)
+//        }
+//        
+//        isLoading = false
+//    }
     
     
 }
