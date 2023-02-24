@@ -31,7 +31,7 @@ struct HomeView: View {
                             Spacer()
                             
                             if let model = vm.forecastWeather {
-                                HourlyRowView(items: model)
+                                HourlyForecastRow(items: model)
                             }
                             
                             Spacer()
@@ -68,7 +68,7 @@ extension HomeView {
                 .font(.title)
                 .fontWeight(.medium)
             
-            Text((vm.currentWeather?.main?.temp?.asStringRounded() ?? "-") + "°C")
+            Text((vm.currentWeather?.main.temp?.asStringRounded() ?? "-") + "°C")
                 .font(.system(size: 50))
                 .fontWeight(.semibold)
             
@@ -76,8 +76,8 @@ extension HomeView {
                 .foregroundColor(.theme.secondaryText)
             
             HStack(spacing: 6) {
-                Text((vm.currentWeather?.main?.tempMin?.asStringRounded() ?? "-") + "° /")
-                Text((vm.currentWeather?.main?.tempMax?.asStringRounded() ?? "-") + "°")
+                Text((vm.currentWeather?.main.tempMin?.asStringRounded() ?? "-") + "° /")
+                Text((vm.currentWeather?.main.tempMax?.asStringRounded() ?? "-") + "°")
             }
         }
         .foregroundColor(.theme.accent)

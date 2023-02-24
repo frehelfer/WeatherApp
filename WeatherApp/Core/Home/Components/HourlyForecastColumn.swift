@@ -1,5 +1,5 @@
 //
-//  HourlyColumnView.swift
+//  HourlyForecastColumn.swift
 //  WeatherApp
 //
 //  Created by Frédéric Helfer on 21/02/23.
@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-struct HourlyColumnView: View {
+struct HourlyForecastColumn: View {
     
-    var item: HourlyItem
+    var item: HourlyWeather
     
     var body: some View {
         VStack(spacing: 14) {
@@ -26,7 +26,7 @@ struct HourlyColumnView: View {
                 .font(.title2)
                 .foregroundColor(.theme.accent.opacity(0.8))
             
-            Text((item.main?.temp?.asStringRounded() ?? "-") + "°")
+            Text((item.main.temp?.asStringRounded() ?? "-") + "°")
                 .font(.headline)
                 .kerning(1.4)
         }
@@ -38,9 +38,9 @@ struct HourlyColumnView: View {
     }
 }
 
-struct HourlyColumnView_Previews: PreviewProvider {
+struct HourlyForecastColumn_Previews: PreviewProvider {
     static var previews: some View {
-        HourlyColumnView(item: HourlyItem.example)
+        HourlyForecastColumn(item: HourlyWeather.example)
             .preferredColorScheme(.dark)
     }
 }

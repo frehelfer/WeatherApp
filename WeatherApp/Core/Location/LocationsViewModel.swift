@@ -19,11 +19,15 @@ class LocationsViewModel: ObservableObject {
     }
     
     func performSearch(text: String) async {
-        let location = Location(cityName: text.replacingOccurrences(of: " ", with: "-"))
+        guard
+            !text.isEmpty,
+            text.count > 3
+        else { return }
+        
+        let location = Location(cityName: text.replacingOccurrences(of: " ", with: "-").lowercased())
         
         do {
             searchedLocations = try await weatherDataService.fetchSearchLocations(location: location)
-            print("fetching...")
         } catch {
             print(error.localizedDescription)
         }

@@ -22,6 +22,8 @@ class WeatherDataService: ObservableObject {
             let url = URL(string: "\(baseUrl)/data/2.5/weather?lat=\(location.lat)&lon=\(location.lon)&appid=\(apiKey)&units=\(units)&lang=\(location.language)") else {
             throw URLError(.badURL)
         }
+        
+        print(url)
 
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
@@ -67,6 +69,7 @@ class WeatherDataService: ObservableObject {
         do {
             let (data, _) = try await URLSession.shared.data(from: url)
             let decoded = try JSONDecoder().decode([SearchLocation].self, from: data)
+            print("fetched..")
             return decoded
         } catch {
             throw URLError(.badServerResponse)

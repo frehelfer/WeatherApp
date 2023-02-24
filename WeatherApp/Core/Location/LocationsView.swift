@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct LocationsView: View {
-    @State var vm = LocationsViewModel()
+    @State private var vm = LocationsViewModel()
     @State var searchText: String = ""
+    
+    @State private var showLocationWeather = false
     
     var body: some View {
         NavigationStack {
@@ -19,10 +21,13 @@ struct LocationsView: View {
                 VStack {
                     List {
                         ForEach(vm.searchedLocations) { location in
-                            NavigationLink {
-                                //
+                            Button {
+                                showLocationWeather.toggle()
                             } label: {
                                 Text("\(location.name), \(location.state ?? ""), \(location.country)")
+                            }
+                            .sheet(isPresented: $showLocationWeather) {
+                                LocationWeatherView()
                             }
                         }
                     }

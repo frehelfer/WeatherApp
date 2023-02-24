@@ -1,5 +1,5 @@
 //
-//  HourlyRowView.swift
+//  HourlyForecastRow.swift
 //  WeatherApp
 //
 //  Created by Frédéric Helfer on 21/02/23.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct HourlyRowView: View {
+struct HourlyForecastRow: View {
     var items: HourlyForecast
     
     var body: some View {
@@ -22,7 +22,7 @@ struct HourlyRowView: View {
                 HStack(spacing: 15) {
                     ForEach(items.list) { item in
                         GeometryReader { geo in
-                            HourlyColumnView(item: item)
+                            HourlyForecastColumn(item: item)
                                 .rotation3DEffect(
                                     Angle(degrees: getPercentage(geo: geo) / -10),
                                     axis: (x: 0.0, y: 10.0, z: 0.0))
@@ -31,7 +31,7 @@ struct HourlyRowView: View {
                     }
                 }
                 .padding(.leading)
-                .padding(.top, 7)
+                .padding(.top, 20)
             }
             
         }
@@ -47,9 +47,9 @@ struct HourlyRowView: View {
     }
 }
 
-struct HourlyRowView_Previews: PreviewProvider {
+struct HourlyForecastRow_Previews: PreviewProvider {
     static var previews: some View {
-        HourlyRowView(items: HourlyForecast.example)
+        HourlyForecastRow(items: HourlyForecast.example)
             .preferredColorScheme(.dark)
     }
 }
