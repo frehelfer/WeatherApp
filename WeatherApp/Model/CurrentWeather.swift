@@ -7,21 +7,21 @@
 
 import Foundation
 
-struct CurrentWeather: Codable {
-    let coord: Coord?
+struct CurrentWeather: Codable, Identifiable {
+    let id: Int
+    let cod: Int
+    let name: String
+    let coord: Coord
+    let main: Main
     let weather: [Weather]
-    let base: String?
-    let main: Main?
-    let visibility: Int?
-    let wind: Wind?
-    let rain: Rain?
-    let clouds: Clouds?
-    let dt: Int?
-    let sys: Sys?
-    let timezone: Int?
-    let id: Int?
-    let name: String?
-    let cod: Int?
+//    let base: String?
+//    let visibility: Int?
+//    let wind: Wind?
+//    let rain: Rain?
+//    let clouds: Clouds?
+//    let dt: Int?
+//    let sys: Sys? // - have sunrise and sunset
+//    let timezone: Int?
 }
 
 struct Coord: Codable {
@@ -46,29 +46,29 @@ struct Main: Codable {
     let grndLevel: Int?
 }
 
-struct Wind: Codable {
-    let speed: Double?
-    let deg: Int?
-    let gust: Double?
-}
-
-struct Rain: Codable {
-    let the1H: Double?
-    
-    enum CodingKeys: String, CodingKey {
-        case the1H = "1h"
-    }
-}
-
-struct Clouds: Codable {
-    let all: Int?
-}
-
-struct Sys: Codable {
-    let type: Int?
-    let id: Int?
-    let country: String?
-    let sunrise: Int?
-    let sunset: Int?
-}
+//struct Wind: Codable {
+//    let speed: Double?
+//    let deg: Int?
+//    let gust: Double?
+//}
+//
+//struct Rain: Codable {
+//    let the1H: Double?
+//
+//    enum CodingKeys: String, CodingKey {
+//        case the1H = "1h"
+//    }
+//}
+//
+//struct Clouds: Codable {
+//    let all: Int?
+//}
+//
+//struct Sys: Codable {
+//    let type: Int?
+//    let id: Int?
+//    let country: String?
+//    let sunrise: Int?
+//    let sunset: Int?
+//}
 
