@@ -30,8 +30,8 @@ struct HourlyForecast: Codable {
 }
 
 struct HourlyWeather: Codable, Identifiable {
-    var id = UUID()
-    let main: Main?
+    let id = UUID()
+    let main: Main
     let weather: [Weather]
     let dtTxt: Date? // "2022-08-30 15:00:00"
 //    let clouds: Clouds?

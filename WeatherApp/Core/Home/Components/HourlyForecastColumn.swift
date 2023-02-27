@@ -26,7 +26,7 @@ struct HourlyForecastColumn: View {
                 .font(.title2)
                 .foregroundColor(.theme.accent.opacity(0.8))
             
-            Text((item.main?.temp?.asStringRounded() ?? "-") + "°")
+            Text((item.main.temp?.asStringRounded() ?? "-") + "°")
                 .font(.headline)
                 .kerning(1.4)
         }

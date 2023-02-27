@@ -47,32 +47,32 @@ struct LocationWeatherView: View {
                     
                 }
                 
-//                if vm.isLoading == false {
-//                    Spacer()
-//                    
-//                    if let model = vm.currentWeather {
-//                        WeatherInfo(currentWeather: model)
-//                    }
-//                    
-//                    Spacer()
-//                    
-//                    if let model = vm.forecastWeather {
-//                        HourlyForecastRow(items: model)
-//                    }
-//                    
-//                    Spacer()
-//                } else {
-//                    // TODO: Show loading view, getting location etc...
-//                    Spacer()
-//                    ProgressView()
-//                    Spacer()
-//                }
+                if vm.isLoading == false {
+                    Spacer()
+
+                    if let model = vm.currentWeather {
+                        WeatherInfo(currentWeather: model)
+                    }
+
+                    Spacer()
+
+                    if let model = vm.forecastWeather {
+                        HourlyForecastRow(items: model)
+                    }
+
+                    Spacer()
+                } else {
+                    // TODO: Show loading view, getting location etc...
+                    Spacer()
+                    ProgressView()
+                    Spacer()
+                }
                 
             }
         }
-//        .task {
-//            await vm.fetchData(location: Location(lat: location.lat, lon: location.lon))
-//        }
+        .task {
+            await vm.fetchData(location: Location(lat: location.lat, lon: location.lon))
+        }
     }
 }
 

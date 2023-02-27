@@ -9,14 +9,14 @@ import Foundation
 
 @MainActor
 class LocationsViewModel: ObservableObject {
-//    @Published var currentWeather: CurrentWeather? = nil
-//    @Published var forecastWeather: HourlyForecast? = nil
-//    @Published var isLoading = false
+    @Published var currentWeather: CurrentWeather? = nil
+    @Published var forecastWeather: HourlyForecast? = nil
+    @Published var isLoading = false
     
     @Published var locationsSaved: [Location] = []
     @Published var searchedLocations: [SearchLocation] = []
     
-    private var weatherDataService = WeatherDataService.shared
+    private var weatherDataService = WeatherDataService()
     
     init() {
         
@@ -28,7 +28,7 @@ class LocationsViewModel: ObservableObject {
             text.count > 3
         else { return }
         
-        let location = Location(cityName: text.replacingOccurrences(of: " ", with: "-").lowercased())
+        let location = Location(cityName: text.replacingOccurrences(of: " ", with: "-").lowercased().folding(options: .diacriticInsensitive, locale: Locale.current))
         
         do {
             searchedLocations = try await weatherDataService.fetchSearchLocations(location: location)
@@ -37,23 +37,23 @@ class LocationsViewModel: ObservableObject {
         }
     }
     
-//    func fetchData(location: Location) async {
-//        isLoading = true
-//        
-//        do {
-//            let (currentWeather, forecastWeather) = try await (
-//                weatherDataService.fetchCurrentWeather(location: location),
-//                weatherDataService.fetchHourlyForecast(location: location)
-//            )
-//            self.currentWeather = currentWeather
-//            self.forecastWeather = forecastWeather
-//            
-//        } catch {
-//            print(error.localizedDescription)
-//        }
-//        
-//        isLoading = false
-//    }
+    func fetchData(location: Location) async {
+        isLoading = true
+        
+        do {
+            let (currentWeather, forecastWeather) = try await (
+                weatherDataService.fetchCurrentWeather(location: location),
+                weatherDataService.fetchHourlyForecast(location: location)
+            )
+            self.currentWeather = currentWeather
+            self.forecastWeather = forecastWeather
+            
+        } catch {
+            print(error.localizedDescription)
+        }
+        
+        isLoading = false
+    }
     
     
 }

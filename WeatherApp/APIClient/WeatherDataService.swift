@@ -14,8 +14,7 @@ class WeatherDataService: ObservableObject {
     private let apiKey = "38ec62852779e6ad30a064b9e15e9bff"
     private let units = "metric"
     
-    static let shared = WeatherDataService()
-    private init() {  }
+    init() {  }
     
     public func fetchCurrentWeather(location: Location) async throws -> CurrentWeather {
         guard

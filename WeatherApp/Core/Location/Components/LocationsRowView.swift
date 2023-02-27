@@ -21,7 +21,7 @@ struct LocationsRowView: View {
             Spacer()
             
             VStack {
-                Text((item.main?.temp?.asStringRounded() ?? "-") + "°")
+                Text((item.main.temp?.asStringRounded() ?? "-") + "°")
                     .kerning(1.3)
                     .font(.system(size: 30).bold())
                 Spacer()

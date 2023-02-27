@@ -14,9 +14,10 @@ struct LocationsView: View {
     @State private var showLocationWeather = false
     
     var body: some View {
-        NavigationStack {
-            ZStack {
-                Color.theme.blueBackground.ignoresSafeArea()
+        ZStack {
+            Color.red
+            
+            NavigationStack {
                 
                 VStack {
                     List {
@@ -32,13 +33,13 @@ struct LocationsView: View {
                         }
                     }
                 }
-            }
-            .navigationTitle("Add Places")
-            .searchable(text: $searchText, prompt: "Search for a city")
-            .onChange(of: searchText) { cityName in
-                
-                Task {
-                    await vm.performSearch(text: cityName)
+                .navigationTitle("Add Places")
+                .searchable(text: $searchText, prompt: "Search for a city")
+                .onChange(of: searchText) { cityName in
+                    
+                    Task {
+                        await vm.performSearch(text: cityName)
+                    }
                 }
             }
         }

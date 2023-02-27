@@ -15,7 +15,7 @@ class HomeViewModel: ObservableObject {
     @Published var forecastWeather: HourlyForecast? = nil
     @Published var isLoading = true
     
-    private var weatherService = WeatherDataService.shared
+    private var weatherService = WeatherDataService()
     
     init() {
         
