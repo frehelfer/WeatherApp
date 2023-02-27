@@ -22,7 +22,7 @@ class WeatherDataService: ObservableObject {
             throw URLError(.badURL)
         }
         
-//        print(url)
+        print(url)
 
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
@@ -42,7 +42,7 @@ class WeatherDataService: ObservableObject {
             throw URLError(.badURL)
         }
         
-//        print(url)
+        print(url)
 
         let decoder = JSONDecoder()
         let dateFormatter = DateFormatter()

@@ -34,7 +34,11 @@ struct HourlyForecastColumn: View {
         .frame(minWidth: 70, minHeight: 145)
         .padding(.vertical, 8)
         .background(.ultraThinMaterial.opacity(0.5))
-        .cornerRadius(40)
+        .cornerRadius(16)
+        .overlay {
+            RoundedRectangle(cornerRadius: 16)
+                .stroke(.gray.opacity(0.3), lineWidth: 3)
+        }
     }
 }
 

@@ -26,6 +26,21 @@ struct HourlyForecast: Codable {
             weather: [Weather(id: 802, main: "Clouds", description: "scattered clouds", icon: .clearSky)],
             dtTxt: Date()
         ),
+        HourlyWeather(
+            main: Main(temp: 27.54, feelsLike: 28.19, tempMin: 26.72, tempMax: 27.54, pressure: 1007, humidity: 53, seaLevel: 1007, grndLevel: 996),
+            weather: [Weather(id: 802, main: "Clouds", description: "scattered clouds", icon: .clearSky)],
+            dtTxt: Date()
+        ),
+        HourlyWeather(
+            main: Main(temp: 27.54, feelsLike: 28.19, tempMin: 26.72, tempMax: 27.54, pressure: 1007, humidity: 53, seaLevel: 1007, grndLevel: 996),
+            weather: [Weather(id: 802, main: "Clouds", description: "scattered clouds", icon: .clearSky)],
+            dtTxt: Date()
+        ),
+        HourlyWeather(
+            main: Main(temp: 27.54, feelsLike: 28.19, tempMin: 26.72, tempMax: 27.54, pressure: 1007, humidity: 53, seaLevel: 1007, grndLevel: 996),
+            weather: [Weather(id: 802, main: "Clouds", description: "scattered clouds", icon: .clearSky)],
+            dtTxt: Date()
+        ),
     ])
 }
 

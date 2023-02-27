@@ -17,7 +17,12 @@ struct LocationWeatherView: View {
     
     var body: some View {
         ZStack {
-            Color.blue.ignoresSafeArea()
+            
+            LinearGradient(gradient: Gradient(stops: [
+                .init(color: .theme.blueBackground, location: 0.30),
+                .init(color: .blue.opacity(0.7), location: 0.80)
+            ]), startPoint: .bottomLeading, endPoint: .top)
+            .ignoresSafeArea()
             
             VStack {
                 HStack {

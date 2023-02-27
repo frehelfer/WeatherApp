@@ -16,6 +16,7 @@ class ColorTheme {
     let secondaryText = Color(.secondaryLabel)
     let blueBackground = Color("BlueBackgroundColor")
     let hourlyBackground = Color("HourlyBackgroundColor")
+    let clearBackground = Color("ClearBackgroundColor")
     
     let tabView = UIColor(named: "TabViewColor")
 }

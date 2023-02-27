@@ -34,6 +34,7 @@
 		8D47172A29A561FB00079790 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D47172929A561FB00079790 /* Date+.swift */; };
 		8D47172C29A59F3E00079790 /* WeatherIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D47172B29A59F3E00079790 /* WeatherIcon.swift */; };
 		8D47173029A5A4F800079790 /* HourlyForecastRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D47172F29A5A4F800079790 /* HourlyForecastRow.swift */; };
+		8DCD1DDA29AD76D900962ED5 /* SavedLocationsRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCD1DD929AD76D900962ED5 /* SavedLocationsRow.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +78,7 @@
 		8D47172929A561FB00079790 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		8D47172B29A59F3E00079790 /* WeatherIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherIcon.swift; sourceTree = "<group>"; };
 		8D47172F29A5A4F800079790 /* HourlyForecastRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyForecastRow.swift; sourceTree = "<group>"; };
+		8DCD1DD929AD76D900962ED5 /* SavedLocationsRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedLocationsRow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,6 +146,7 @@
 		8D11998A29A8099900931CD9 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				8DCD1DD929AD76D900962ED5 /* SavedLocationsRow.swift */,
 				8D11998B29A809AC00931CD9 /* LocationsRowView.swift */,
 			);
 			path = Components;
@@ -382,6 +385,7 @@
 				8D47171829A50E6B00079790 /* HomeViewModel.swift in Sources */,
 				8D47170229A4210100079790 /* WeatherAppApp.swift in Sources */,
 				8D47171E29A51D5E00079790 /* Location.swift in Sources */,
+				8DCD1DDA29AD76D900962ED5 /* SavedLocationsRow.swift in Sources */,
 				8D47172029A51F1000079790 /* HourlyForecast.swift in Sources */,
 				8D47172C29A59F3E00079790 /* WeatherIcon.swift in Sources */,
 				8D11996E29A67D0A00931CD9 /* RequestLocationView.swift in Sources */,

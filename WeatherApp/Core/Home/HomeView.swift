@@ -16,9 +16,11 @@ struct HomeView: View {
             
             LinearGradient(gradient: Gradient(stops: [
                 .init(color: .theme.blueBackground, location: 0.30),
-                .init(color: .blue.opacity(0.5), location: 0.90)
+                .init(color: .blue.opacity(0.7), location: 0.80)
             ]), startPoint: .bottomLeading, endPoint: .top)
             .ignoresSafeArea()
+            
+//            Color.theme.blueBackground.ignoresSafeArea()
             
             
             Group {

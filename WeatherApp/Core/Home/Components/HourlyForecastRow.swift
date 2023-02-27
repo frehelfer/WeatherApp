@@ -22,16 +22,18 @@ struct HourlyForecastRow: View {
                 HStack(spacing: 15) {
                     ForEach(items.list) { item in
                         GeometryReader { geo in
+                            
                             HourlyForecastColumn(item: item)
                                 .rotation3DEffect(
-                                    Angle(degrees: getPercentage(geo: geo) / -10),
-                                    axis: (x: 0.0, y: 10.0, z: 0.0))
+                                    Angle(degrees: getAngle(geo: geo) / -4),
+                                    axis: (x: 0.4, y: 6, z: 0.7))
                         }
                         .frame(width: 70, height: 165)
                     }
                 }
                 .padding(.leading)
                 .padding(.top, 20)
+                .padding(.trailing, 50)
             }
             
         }
@@ -40,10 +42,13 @@ struct HourlyForecastRow: View {
         .background(Color.theme.hourlyBackground)
     }
     
-    func getPercentage(geo: GeometryProxy) -> Double {
-//        let maxDistance = UIScreen.main.bounds.width / 2
+    func getAngle(geo: GeometryProxy) -> Double {
         let currentX = geo.frame(in: .global).minX
-        return Double(currentX - 30)
+        
+        if currentX < 240 {
+            return 0
+        }
+        return Double(currentX - 240)
     }
 }
 

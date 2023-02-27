@@ -19,7 +19,7 @@ struct WeatherInfo: View {
             HStack(spacing: 15) {
                 Image(systemName: currentWeather.weather.first?.icon?.text ?? "")
                     .font(.title)
-                    .foregroundColor(.theme.accent.opacity(0.65))
+                    .foregroundColor(.theme.accent.opacity(0.8))
                 
                 Text((currentWeather.main.temp?.asStringRounded() ?? "-") + "°C")
                     .font(.system(size: 50))
