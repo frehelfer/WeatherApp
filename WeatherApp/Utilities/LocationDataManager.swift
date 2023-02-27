@@ -22,15 +22,15 @@ class LocationDataManager: NSObject, ObservableObject {
         super.init()
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyReduced
-        locationManager.requestLocation()
     }
     
     func requestLocation() {
-        locationManager.requestLocation()
         isLoading = true
+        locationManager.requestLocation()
     }
     
     func requestPermission() {
+        isLoading = true
         locationManager.requestWhenInUseAuthorization()
     }
     
@@ -71,9 +71,9 @@ extension LocationDataManager: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let newLocation = locations.first?.coordinate else { return }
-        
         location = Location(lat: newLocation.latitude, lon: newLocation.longitude)
         isLoading = false
+        print("location virou: \(isLoading)")
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {

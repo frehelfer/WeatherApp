@@ -22,6 +22,8 @@ class HomeViewModel: ObservableObject {
     }
     
     func fetchData(location: Location) async {
+        isLoading = true
+        
         do {
             let (currentWeather, forecastWeather) = try await (
                 weatherService.fetchCurrentWeather(location: location),
@@ -29,11 +31,10 @@ class HomeViewModel: ObservableObject {
             )
             self.currentWeather = currentWeather
             self.forecastWeather = forecastWeather
-            
+            isLoading = false
         } catch {
+            isLoading = false
             print(error.localizedDescription)
         }
-        
-        isLoading = false
     }
 }

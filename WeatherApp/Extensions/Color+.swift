@@ -15,4 +15,6 @@ class ColorTheme {
     let accent = Color(.label)
     let secondaryText = Color(.secondaryLabel)
     let blueBackground = Color("BlueBackgroundColor")
+    
+    let tabView = UIColor(named: "TabViewColor")
 }
