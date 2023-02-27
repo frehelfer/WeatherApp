@@ -58,33 +58,37 @@ struct HomeView: View {
 extension HomeView {
     
     var homeView: some View {
-        GeometryReader { proxy in
-            ScrollView {
-                VStack {
-                    if vm.isLoading == false {
-                        
-                        Spacer()
-                        if let model = vm.currentWeather {
-                            WeatherInfo(currentWeather: model)
+        ZStack {
+            GeometryReader { proxy in
+                ScrollView(.vertical, showsIndicators: false) {
+                    VStack {
+                        if vm.isLoading == false {
+                            
+                            Spacer()
+                            if let model = vm.currentWeather {
+                                WeatherInfo(currentWeather: model)
+                            }
+                            Spacer()
+                            if let model = vm.forecastWeather {
+                                HourlyForecastRow(items: model)
+                            }
+                            
+                        } else {
+                            
+                            Text("Getting the weather of your location")
+                            ProgressView()
+                            
                         }
-                        Spacer()
-                        if let model = vm.forecastWeather {
-                            HourlyForecastRow(items: model)
-                        }
-                        Spacer()
-                        
-                    } else {
-                        
-                        Text("Getting the weather of your location")
-                        ProgressView()
-                        
+                    }
+                    .frame(minHeight: proxy.size.height)
+                    .frame(maxWidth: .infinity)
+                }
+                .refreshable {
+                    locationDataManager.requestLocation()
+                    withAnimation {
+                        vm.isLoading = true
                     }
                 }
-                .frame(minHeight: proxy.size.height)
-                .frame(maxWidth: .infinity)
-            }
-            .refreshable {
-                locationDataManager.requestLocation()
             }
         }
     }

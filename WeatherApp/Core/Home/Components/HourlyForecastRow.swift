@@ -37,7 +37,7 @@ struct HourlyForecastRow: View {
         }
         .foregroundColor(.theme.accent)
         .padding(.vertical)
-        .background(.ultraThinMaterial)
+        .background(Color.theme.hourlyBackground)
     }
     
     func getPercentage(geo: GeometryProxy) -> Double {

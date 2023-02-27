@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 //Location(lat: -29.737030, lon: -52.448650)
 
@@ -31,7 +32,9 @@ class HomeViewModel: ObservableObject {
             )
             self.currentWeather = currentWeather
             self.forecastWeather = forecastWeather
-            isLoading = false
+            withAnimation {
+                isLoading = false
+            }
         } catch {
             isLoading = false
             print(error.localizedDescription)
