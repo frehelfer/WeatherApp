@@ -12,6 +12,7 @@ struct LocationsView: View {
     @State var searchText: String = ""
     
     @State private var showLocationWeather = false
+    @State private var showSavedLocationWeather = false
     
     var body: some View {
         NavigationStack {
@@ -20,7 +21,17 @@ struct LocationsView: View {
                 ScrollView {
 
                     if searchText.isEmpty {
-                        Text("aqui savedLocations")
+                        ForEach(vm.savedLocationsWeather) { weather in
+                            Button {
+                                showSavedLocationWeather.toggle()
+                            } label: {
+                                SavedLocationsRow(currentWeather: weather)
+                                    .padding(.horizontal)
+                            }
+                            .sheet(isPresented: $showSavedLocationWeather) {
+                                LocationWeatherView(vm: vm, location: SearchLocation(name: weather.name, lat: weather.coord.lat, lon: weather.coord.lon, country: "", state: nil), isFav: true)
+                            }
+                        }
                     } else {
                         searchedLocations
                     }
@@ -35,9 +46,12 @@ struct LocationsView: View {
                 }
             }
         }
+        .task {
+            await vm.fetchSavedLocations()
+        }
         .onAppear {
-            // buscar savedLocations no coreData
-            // baixar dados de todos items e entregar pra eles
+            
+            
         }
     }
 }

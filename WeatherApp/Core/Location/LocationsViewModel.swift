@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 
 @MainActor
 class LocationsViewModel: ObservableObject {
@@ -14,12 +15,47 @@ class LocationsViewModel: ObservableObject {
     @Published var isLoading = false
     
     @Published var savedLocations: [Location] = []
+    @Published var savedLocationsWeather: [CurrentWeather] = []
     @Published var searchedLocations: [SearchLocation] = []
     
     private var weatherDataService = WeatherDataService()
+    private var coreDataManager = CoreDataManager.shared
+    
+    private var cancellables = Set<AnyCancellable>()
     
     init() {
+        addSubscribers()
+    }
+    
+    func addSubscribers() {
         
+        coreDataManager.$locationsEntities
+            .map { locationsEntities -> [Location] in
+                
+                let locations: [Location] = locationsEntities.map({ entity in
+                    return Location(
+                        id: UUID(),
+                        cityName: entity.cityName ?? "",
+                        lat: entity.lat,
+                        lon: entity.lon
+                        )
+                })
+                
+                return locations
+            }
+            .sink { [weak self] locations in
+                self?.savedLocations = locations
+            }
+            .store(in: &cancellables)
+        
+        
+        $savedLocations
+            .sink { [weak self] _ in
+                Task {
+                    await self?.fetchSavedLocations()
+                }
+            }
+            .store(in: &cancellables)
     }
     
     func performSearch(text: String) async {
@@ -55,5 +91,31 @@ class LocationsViewModel: ObservableObject {
         isLoading = false
     }
     
+    func fetchSavedLocations() async {
+        
+        do {
+            savedLocationsWeather = try await weatherDataService.fetchLocationsWeather(locations: savedLocations)
+        } catch  {
+            print(error.localizedDescription)
+        }
+    }
     
+    // MARK: - Core Data
+    private func addLocation(location: Location) {
+        coreDataManager.addLocation(location: location)
+    }
+    
+    private func removeLocation(location: Location) {
+        coreDataManager.removeLocation(location: location)
+    }
+    
+    public func addOrRemoveLocation(searchLocation: SearchLocation, isFav: Bool) {
+        let location = Location(id: UUID(), cityName: searchLocation.name, lat: searchLocation.lat, lon: searchLocation.lon)
+        
+        if isFav {
+            addLocation(location: location)
+        } else {
+            removeLocation(location: location)
+        }
+    }
 }

@@ -42,7 +42,9 @@ struct HomeView: View {
                 }
             }
         }.onAppear {
-            locationDataManager.requestLocation()
+            if locationDataManager.location == nil {
+                locationDataManager.requestLocation()
+            }
         }
         .onChange(of: locationDataManager.isLoading, perform: { newValue in
             guard

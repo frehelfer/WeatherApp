@@ -41,6 +41,8 @@ struct LocationWeatherView: View {
                     
                     Button {
                         isFav.toggle()
+                        print(isFav)
+                        vm.addOrRemoveLocation(searchLocation: location, isFav: isFav)
                     } label: {
                         Label("Add to favorites", systemImage: isFav ? "heart.fill" : "heart")
                             .labelStyle(.iconOnly)
@@ -73,6 +75,11 @@ struct LocationWeatherView: View {
                     Spacer()
                 }
                 
+            }
+        }
+        .onAppear {
+            if vm.savedLocations.contains(where: { $0.lat == location.lat && $0.lon == location.lon }) {
+                isFav = true
             }
         }
         .task {

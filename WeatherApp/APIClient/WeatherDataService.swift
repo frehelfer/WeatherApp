@@ -16,6 +16,29 @@ class WeatherDataService: ObservableObject {
     
     init() {  }
     
+    public func fetchLocationsWeather(locations: [Location]) async throws -> [CurrentWeather] {
+        
+        return try await withThrowingTaskGroup(of: CurrentWeather?.self) { group in
+            var weathers: [CurrentWeather] = []
+            weathers.reserveCapacity(locations.count)
+            
+            for location in locations {
+                group.addTask {
+                    try? await self.fetchCurrentWeather(location: location)
+                }
+            }
+            
+            for try await weather in group {
+                if let weather {
+                    weathers.append(weather)
+                }
+            }
+            
+            return weathers
+        }
+        
+    }
+    
     public func fetchCurrentWeather(location: Location) async throws -> CurrentWeather {
         guard
             let url = URL(string: "\(baseUrl)/data/2.5/weather?lat=\(location.lat)&lon=\(location.lon)&appid=\(apiKey)&units=\(units)&lang=\(location.language)") else {
