@@ -13,7 +13,7 @@ class LocationsViewModel: ObservableObject {
     @Published var forecastWeather: HourlyForecast? = nil
     @Published var isLoading = false
     
-    @Published var locationsSaved: [Location] = []
+    @Published var savedLocations: [Location] = []
     @Published var searchedLocations: [SearchLocation] = []
     
     private var weatherDataService = WeatherDataService()
