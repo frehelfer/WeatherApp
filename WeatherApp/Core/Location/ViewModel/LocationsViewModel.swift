@@ -34,14 +34,17 @@ class LocationsViewModel: ObservableObject {
                 
                 let locations: [Location] = locationsEntities.map({ entity in
                     return Location(
-                        id: UUID(),
+                        id: entity.id ?? "",
+                        weatherID: Int(entity.weatherID),
                         cityName: entity.cityName ?? "",
                         lat: entity.lat,
                         lon: entity.lon
                         )
                 })
                 
-                return locations
+                let sortedLocations = locations.sorted { $0.cityName < $1.cityName }
+                
+                return sortedLocations
             }
             .sink { [weak self] locations in
                 self?.savedLocations = locations
@@ -109,8 +112,7 @@ class LocationsViewModel: ObservableObject {
         coreDataManager.removeLocation(location: location)
     }
     
-    public func addOrRemoveLocation(searchLocation: SearchLocation, isFav: Bool) {
-        let location = Location(id: UUID(), cityName: searchLocation.name, lat: searchLocation.lat, lon: searchLocation.lon)
+    public func addOrRemoveLocation(location: Location, isFav: Bool) {
         
         if isFav {
             addLocation(location: location)

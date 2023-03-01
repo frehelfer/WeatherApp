@@ -12,7 +12,6 @@ struct LocationsView: View {
     @State var searchText: String = ""
     
     @State private var showLocationWeather = false
-    @State private var showSavedLocationWeather = false
     
     var body: some View {
         NavigationStack {
@@ -22,14 +21,11 @@ struct LocationsView: View {
 
                     if searchText.isEmpty {
                         ForEach(vm.savedLocationsWeather) { weather in
-                            Button {
-                                showSavedLocationWeather.toggle()
+                            NavigationLink {
+                                SavedLocationDetail(vm: vm, location: weather)
                             } label: {
                                 SavedLocationsRow(currentWeather: weather)
                                     .padding(.horizontal)
-                            }
-                            .sheet(isPresented: $showSavedLocationWeather) {
-                                LocationWeatherView(vm: vm, location: SearchLocation(name: weather.name, lat: weather.coord.lat, lon: weather.coord.lon, country: "", state: nil), isFav: true)
                             }
                         }
                     } else {

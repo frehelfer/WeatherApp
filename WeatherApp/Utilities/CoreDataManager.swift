@@ -11,11 +11,10 @@ import CoreData
 class CoreDataManager: ObservableObject {
     @Published var locationsEntities: [LocationEntity] = []
     
-    let container: NSPersistentContainer
+    let container = NSPersistentContainer(name: "Locations")
     
     static let shared = CoreDataManager()
     private init() {
-        self.container = NSPersistentContainer(name: "Locations")
         container.loadPersistentStores { description, error in
             if let error {
                 print("Error loading core data: \(error.localizedDescription)")
@@ -37,6 +36,8 @@ class CoreDataManager: ObservableObject {
     
     func addLocation(location: Location) {
         let newLocation = LocationEntity(context: container.viewContext)
+        newLocation.id = location.id
+        newLocation.weatherID = Int64(location.weatherID)
         newLocation.cityName = location.cityName
         newLocation.lat = location.lat
         newLocation.lon = location.lon
@@ -45,13 +46,22 @@ class CoreDataManager: ObservableObject {
     }
     
     func removeLocation(location: Location) {
-        guard let index = locationsEntities.firstIndex(where: { $0.lat == location.lat && $0.lon == location.lon }) else { return }
+        guard
+            let index = locationsEntities.firstIndex(where: { entity in
+                entity.weatherID == location.weatherID ||
+                entity.id ?? "" == location.id
+            })
+        else { return }
+        
+        print("Achou o index!")
         let entity = locationsEntities[index]
         container.viewContext.delete(entity)
         saveData()
     }
     
     func saveData() {
+        guard container.viewContext.hasChanges else { return }
+        
         do {
             try container.viewContext.save()
             fetchLocations()

@@ -45,6 +45,7 @@ struct SavedLocationsRow: View {
                 }
             }
         }
+        .foregroundColor(.theme.accent)
         .frame(height: 80)
         .padding()
         .background(Color.theme.blueBackground.opacity(0.8))

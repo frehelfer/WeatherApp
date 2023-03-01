@@ -42,7 +42,10 @@ struct LocationWeatherView: View {
                     Button {
                         isFav.toggle()
                         print(isFav)
-                        vm.addOrRemoveLocation(searchLocation: location, isFav: isFav)
+                        vm.addOrRemoveLocation(location: Location(
+                            weatherID: vm.currentWeather?.id ?? 0,
+                            lat: vm.currentWeather?.coord.lat ?? 0,
+                            lon: vm.currentWeather?.coord.lon ?? 0), isFav: isFav)
                     } label: {
                         Label("Add to favorites", systemImage: isFav ? "heart.fill" : "heart")
                             .labelStyle(.iconOnly)
@@ -56,17 +59,17 @@ struct LocationWeatherView: View {
                 
                 if vm.isLoading == false {
                     Spacer()
-
+                    
                     if let model = vm.currentWeather {
                         WeatherInfo(currentWeather: model)
                     }
-
+                    
                     Spacer()
-
+                    
                     if let model = vm.forecastWeather {
                         HourlyForecastRow(items: model)
                     }
-
+                    
                     Spacer()
                 } else {
                     // TODO: Show loading view, getting location etc...
@@ -78,7 +81,8 @@ struct LocationWeatherView: View {
             }
         }
         .onAppear {
-            if vm.savedLocations.contains(where: { $0.lat == location.lat && $0.lon == location.lon }) {
+            //            if vm.savedLocations.contains(where: { $0.lat == location.lat && $0.lon == location.lon }) {
+            if vm.savedLocations.contains(where: { $0.cityName == location.name }) {
                 isFav = true
             }
         }
