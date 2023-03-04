@@ -36,7 +36,7 @@ class WeatherDataService: ObservableObject {
             
             let sortedWeather = weathers.sorted { $0.name < $1.name }
             
-            return weathers
+            return sortedWeather
         }
         
     }
