@@ -13,6 +13,9 @@ class WeatherDataService: ObservableObject {
     private let baseUrl = "https://api.openweathermap.org"
     private let apiKey = "38ec62852779e6ad30a064b9e15e9bff"
     private let units = "metric"
+    //    private let language: String = Locale.preferredLanguages.first?.lowercased().replacingOccurrences(of: "-", with: "_") ?? "en"
+    private let language: String = "en"
+    
     
     init() {  }
     
@@ -43,12 +46,12 @@ class WeatherDataService: ObservableObject {
     
     public func fetchCurrentWeather(location: Location) async throws -> CurrentWeather {
         guard
-            let url = URL(string: "\(baseUrl)/data/2.5/weather?lat=\(location.lat)&lon=\(location.lon)&appid=\(apiKey)&units=\(units)&lang=\(location.language)") else {
+            let url = URL(string: "\(baseUrl)/data/2.5/weather?lat=\(location.lat)&lon=\(location.lon)&appid=\(apiKey)&units=\(units)&lang=\(self.language)") else {
             throw URLError(.badURL)
         }
         
-        print(url)
-
+//        print(url)
+        
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         
@@ -63,12 +66,12 @@ class WeatherDataService: ObservableObject {
     
     public func fetchHourlyForecast(location: Location) async throws -> HourlyForecast {
         guard
-            let url = URL(string: "\(baseUrl)/data/2.5/forecast?lat=\(location.lat)&lon=\(location.lon)&appid=\(apiKey)&units=\(units)&lang=\(location.language)") else {
+            let url = URL(string: "\(baseUrl)/data/2.5/forecast?lat=\(location.lat)&lon=\(location.lon)&appid=\(apiKey)&units=\(units)&lang=\(self.language)") else {
             throw URLError(.badURL)
         }
         
-        print(url)
-
+//        print(url)
+        
         let decoder = JSONDecoder()
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss" // 2023-02-22 03:00:00
@@ -87,7 +90,6 @@ class WeatherDataService: ObservableObject {
     
     public func fetchSearchLocations(location: Location) async throws -> [SearchLocation] {
         guard
-//            http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit={limit}&appid={API key}
             let url = URL(string: "\(baseUrl)/geo/1.0/direct?q=\(location.cityName)&limit=5&appid=\(apiKey)") else {
             throw URLError(.badURL)
         }
@@ -95,7 +97,6 @@ class WeatherDataService: ObservableObject {
         do {
             let (data, _) = try await URLSession.shared.data(from: url)
             let decoded = try JSONDecoder().decode([SearchLocation].self, from: data)
-            print("fetched..")
             return decoded
         } catch {
             throw error

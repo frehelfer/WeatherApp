@@ -79,7 +79,7 @@ extension HomeView {
                             
                         } else {
                             
-                            Text("Getting the weather of your location")
+                            Text("Searching the weather forecast for your location")
                             ProgressView()
                             
                         }

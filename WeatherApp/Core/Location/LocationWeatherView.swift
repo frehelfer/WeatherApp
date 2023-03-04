@@ -41,7 +41,6 @@ struct LocationWeatherView: View {
                     
                     Button {
                         isFav.toggle()
-                        print(isFav)
                         vm.addOrRemoveLocation(location: Location(
                             weatherID: vm.currentWeather?.id ?? 0,
                             lat: vm.currentWeather?.coord.lat ?? 0,

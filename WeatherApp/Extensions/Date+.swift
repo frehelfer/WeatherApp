@@ -27,6 +27,7 @@ extension Date {
     /// ```
     func asDaysOfWeek() -> String {
         let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "en") // remove
         dateFormatter.dateFormat = "ccc"
         return dateFormatter.string(from: self)
     }

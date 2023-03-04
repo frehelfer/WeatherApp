@@ -53,7 +53,6 @@ class CoreDataManager: ObservableObject {
             })
         else { return }
         
-        print("Achou o index!")
         let entity = locationsEntities[index]
         container.viewContext.delete(entity)
         saveData()

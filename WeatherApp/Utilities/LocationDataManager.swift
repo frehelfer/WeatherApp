@@ -73,7 +73,6 @@ extension LocationDataManager: CLLocationManagerDelegate {
         guard let newLocation = locations.first?.coordinate else { return }
         location = Location(lat: newLocation.latitude, lon: newLocation.longitude)
         isLoading = false
-        print("location virou: \(isLoading)")
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {

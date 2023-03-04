@@ -49,7 +49,6 @@ struct SavedLocationDetail: View {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
                     isFav.toggle()
-                    print(isFav)
                     vm.addOrRemoveLocation(location: Location(
                         weatherID: location.id,
                         cityName: location.name,

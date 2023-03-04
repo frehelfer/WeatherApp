@@ -13,5 +13,4 @@ struct Location: Identifiable {
     var cityName: String = ""
     var lat: Double = 0.0
     var lon: Double = 0.0
-    let language: String = Locale.preferredLanguages.first?.lowercased().replacingOccurrences(of: "-", with: "_") ?? "en"
 }
